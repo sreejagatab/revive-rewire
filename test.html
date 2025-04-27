@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revive Rewire - Test Page</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .test-section h2 {
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .test-result {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        
+        .test-success {
+            background-color: rgba(112, 192, 61, 0.1);
+            color: var(--green);
+        }
+        
+        .test-failure {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Revive Rewire - Test Page</h1>
+        <p>This page tests if the CSS and JavaScript files are loading correctly.</p>
+        
+        <div class="test-section">
+            <h2>CSS Test</h2>
+            <p>Testing if the CSS files are loaded correctly:</p>
+            <div id="css-test-result" class="test-result">Running test...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>JavaScript Test</h2>
+            <p>Testing if the JavaScript files are loaded correctly:</p>
+            <div id="js-test-result" class="test-result">Running test...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Responsive Test</h2>
+            <p>Testing if the responsive CSS is working:</p>
+            <div id="responsive-test-result" class="test-result">Running test...</div>
+        </div>
+        
+        <a href="index.html" class="cta-button">Back to Homepage</a>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Test CSS
+            const cssTest = document.getElementById('css-test-result');
+            const computedStyle = window.getComputedStyle(document.querySelector('.cta-button'));
+            const buttonBgColor = computedStyle.backgroundColor;
+            
+            if (buttonBgColor.includes('112') || buttonBgColor.includes('192') || buttonBgColor.includes('61')) {
+                cssTest.textContent = 'SUCCESS: CSS files are loaded correctly!';
+                cssTest.classList.add('test-success');
+            } else {
+                cssTest.textContent = 'FAILURE: CSS files are not loaded correctly.';
+                cssTest.classList.add('test-failure');
+            }
+            
+            // Test JavaScript
+            const jsTest = document.getElementById('js-test-result');
+            if (typeof document.querySelector === 'function') {
+                jsTest.textContent = 'SUCCESS: JavaScript is working correctly!';
+                jsTest.classList.add('test-success');
+            } else {
+                jsTest.textContent = 'FAILURE: JavaScript is not working correctly.';
+                jsTest.classList.add('test-failure');
+            }
+            
+            // Test Responsive CSS
+            const responsiveTest = document.getElementById('responsive-test-result');
+            const checkResponsive = () => {
+                if (window.innerWidth <= 768) {
+                    responsiveTest.textContent = 'SUCCESS: You are viewing this on a small screen, and responsive styles are applied.';
+                    responsiveTest.classList.add('test-success');
+                } else {
+                    responsiveTest.textContent = 'SUCCESS: You are viewing this on a larger screen. Resize the window to see responsive changes.';
+                    responsiveTest.classList.add('test-success');
+                }
+            };
+            
+            checkResponsive();
+            window.addEventListener('resize', checkResponsive);
+        });
+    </script>
+</body>
+</html>

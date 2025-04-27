@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Revive Rewire</title>
+    <style>
+        :root {
+            --navy: #0b1424;
+            --green: #70c03d;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-top {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .contact-info a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-info a:hover {
+            color: var(--green);
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--green);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--green);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background-color: var(--green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background-color: #5da731;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--navy);
+        }
+        
+        /* Page Banner */
+        .page-banner {
+            background-image: linear-gradient(rgba(11, 20, 36, 0.8), rgba(11, 20, 36, 0.8)), url('/api/placeholder/1600/400');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .page-banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumbs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .breadcrumbs a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            opacity: 1;
+            color: var(--green);
+        }
+        
+        .breadcrumbs span {
+            opacity: 0.5;
+        }
+        
+        /* Services Intro */
+        .services-intro {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .services-intro h2 {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .services-intro h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--green);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services-intro p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Service Details */
+        .service-details {
+            padding: 0 0 80px;
+        }
+        
+        .service-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .service-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .service-item:nth-child(even) .service-image {
+            order: 1;
+        }
+        
+        .service-text h3 {
+            font-size: 1.8rem;
+            color: var(--navy);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .service-text h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--green);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .service-text p {
+            margin-bottom: 20px;
+        }
+        
+        .service-text ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .service-text ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .service-text ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
+        }
+        
+        .service-image {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Process Section */
+        .process-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--green);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: var(--medium-gray);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 15px;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--green);
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .step h3 {
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        /* FAQs Section */
+        .faqs-section {
+            padding: 80px 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: var(--white);
+            font-weight: 600;
+            color: var(--navy);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            background-color: var(--light-gray);
+        }
+        
+        .faq-answer p {
+            padding-bottom: 20px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 20px;
+        }
+        
+        .faq-toggle {
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+        
+        .faq-toggle::before,
+        .faq-toggle::after {
+            content: '';
+            position: absolute;
+            background-color: var(--green);
+            transition: transform 0.3s;
+        }
+        
+        .faq-toggle::before {
+            width: 2px;
+            height: 24px;
+            left: 11px;
+            top: 0;
+        }
+        
+        .faq-toggle::after {
+            width: 24px;
+            height: 2px;
+            left: 0;
+            top: 11px;
+        }
+        
+        .faq-item.active .faq-toggle::before {
+            transform: rotate(90deg);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background-image: linear-gradient(rgba(11, 20, 36, 0.8), rgba(11, 20, 36, 0.8)), url('/api/placeholder/1600/600');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section .cta-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 60px 0 0;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--green);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p, .footer-column address {
+            margin-bottom: 15px;
+            font-style: normal;
+            opacity: 0.8;
+        }
+        
+        .footer-column a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--green);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .footer-bottom p {
+            opacity: 0.7;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .service-item .service-image,
+            .service-item:nth-child(even) .service-image {
+                order: -1;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 50px;
+            }
+            
+            .process-steps::before {
+                width: 2px;
+                height: 80%;
+                top: 40px;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 80%;
+                max-width: 300px;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                transition: right 0.3s;
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1000;
+            }
+            
+            .header-top .contact-info {
+                display: none;
+            }
+            
+            .header-top .container {
+                justify-content: center;
+            }
+            
+            .page-banner {
+                padding: 60px 0;
+            }
+            
+            .page-banner h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <a href="tel:07903889841">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                        </svg>
+                        07903 889841
+                    </a>
+                    <a href="mailto:info@reviverewire.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                        </svg>
+                        info@reviverewire.com
+                    </a>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="/api/placeholder/200/80" alt="Revive Rewire Logo">
+                    </a>
+                </div>
+                <button class="mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html" class="active">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html" class="cta-button">Get a Quote</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Our Services</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="services.html">Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Intro -->
+    <section class="services-intro">
+        <div class="container">
+            <h2>Electrical Services You Can Trust</h2>
+            <p>Revive Rewire offers comprehensive electrical services for homeowners and landlords throughout Greater Manchester. All our work is carried out to the highest safety standards by our team of qualified, experienced electricians.</p>
+        </div>
+    </section>
+
+    <!-- Service Details -->
+    <section class="service-details">
+        <div class="container">
+            <div class="service-item">
+                <div class="service-text">
+                    <h3>Full Home Rewires</h3>
+                    <p>A full home rewire involves replacing the outdated electrical wiring system in your property with modern, safer wiring that meets current standards. This is often necessary in older properties where the wiring has degraded or no longer meets safety regulations.</p>
+                    <p>At Revive Rewire, we specialize in minimizing disruption while ensuring your home's electrical system is completely modernized and safe.</p>
+                    <ul>
+                        <li>Complete replacement of outdated wiring</li>
+                        <li>Installation of modern consumer units</li>
+                        <li>Upgrading to current safety standards</li>
+                        <li>Thorough testing and certification</li>
+                        <li>Minimal disruption to your living space</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Enquire About Rewiring</a>
+                </div>
+                <div class="service-image">
+                    <img src="/api/placeholder/600/400" alt="Home Rewiring">
+                </div>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-text">
+                    <h3>Electrical Installation Condition Reports (EICRs)</h3>
+                    <p>An EICR (Electrical Installation Condition Report) is a comprehensive inspection of your property's electrical systems and components to ensure they meet legal safety standards and are operating correctly.</p>
+                    <p>Our thorough EICR service provides peace of mind for homeowners and helps landlords meet their legal obligations to tenants.</p>
+                    <ul>
+                        <li>Comprehensive inspection of all electrical systems</li>
+                        <li>Identification of potential electrical hazards</li>
+                        <li>Official certification for landlords and homeowners</li>
+                        <li>Detailed report with clear recommendations</li>
+                        <li>Fast turnaround times</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Book an EICR</a>
+                </div>
+                <div class="service-image">
+                    <img src="/api/placeholder/600/400" alt="EICR Inspection">
+                </div>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-text">
+                    <h3>EV Charger Installations</h3>
+                    <p>As electric vehicles become increasingly popular, having a dedicated home charging point installed is essential for EV owners. We provide professional installation of high-quality EV charging points to make charging your electric vehicle safe, convenient, and efficient.</p>
+                    <p>Our EV charger installations are carried out by specialists who understand the specific requirements and regulations for home charging solutions.</p>
+                    <ul>
+                        <li>Professional installation of leading EV charger brands</li>
+                        <li>Comprehensive assessment of your property's electrical capacity</li>
+                        <li>Advice on the most suitable charging solution for your needs</li>
+                        <li>Full certification and warranty</li>
+                        <li>Compliance with all safety regulations</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Get EV Charger Quote</a>
+                </div>
+                <div class="service-image">
+                    <img src="/api/placeholder/600/400" alt="EV Charger Installation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Process</h2>
+                <p>We follow a clear, transparent process for all our electrical services, ensuring high-quality results and complete customer satisfaction.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Initial Consultation</h3>
+                    <p>We discuss your requirements and arrange a convenient time to visit your property for assessment.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Property Assessment</h3>
+                    <p>Our qualified electrician visits your property to assess the work required and discuss options with you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Detailed Quote</h3>
+                    <p>We provide a comprehensive, no-obligation quote outlining all costs and the scope of work.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Scheduling</h3>
+                    <p>Once you're happy to proceed, we arrange a convenient time to carry out the work with minimal disruption.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Quality Work</h3>
+                    <p>Our experienced team completes the work to the highest standards, keeping you informed throughout.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h3>Testing & Certification</h3>
+                    <p>We thoroughly test all our work and provide the necessary certification for your peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faqs-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Get answers to common questions about our electrical services.</p>
+            </div>
+            <div class="faqs">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does a full house rewire take?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The duration of a full house rewire depends on the size and complexity of your property. For an average 3-bedroom house, a rewire typically takes 7-10 days. We work efficiently to minimize disruption to your daily life and can discuss scheduling options to accommodate your needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How often should I get an EICR?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For homeowners, we recommend getting an EICR every 10 years or when you purchase a new property. For landlords, regulations require an EICR every 5 years or when there's a change of tenancy. Properties with swimming pools or high risk factors may need more frequent inspections.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What type of EV chargers do you install?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We install a range of quality EV chargers from leading manufacturers. We primarily recommend and install home charging units with outputs ranging from 3.6kW to 22kW depending on your vehicle and property's electrical capacity. During our assessment, we'll recommend the most suitable charger for your specific needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer any guarantees on your work?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all our electrical work comes with a comprehensive guarantee. Full rewires and major electrical installations are guaranteed for 6 years, while smaller installations and repairs carry a 12-month guarantee. Additionally, we provide all necessary certification for insurance purposes.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are you registered with any professional bodies?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Revive Rewire is fully certified and registered with relevant professional bodies. Our electricians are qualified to current standards, and we maintain all necessary insurance and certifications to ensure our work meets industry regulations and safety standards.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Discuss Your Electrical Project?</h2>
+            <p>Contact us today to speak with one of our qualified electricians and get a no-obligation quote.</p>
+            <a href="contact.html" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h3>About Revive Rewire</h3>
+                    <p>Revive Rewire is a specialist electrical company focusing on full home rewires, EICRs, and EV charger installations. We pride ourselves on safe, high-quality workmanship and building trust with our customers.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <a href="services.html">Full Home Rewires</a>
+                    <a href="services.html">Electrical Installation Condition Reports</a>
+                    <a href="services.html">EV Charger Installations</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        Greater Manchester<br>
+                        Phone: <a href="tel:07903889841">07903 889841</a><br>
+                        Email: <a href="mailto:info@reviverewire.com">info@reviverewire.com</a>
+                    </address>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Revive Rewire. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+        
+        // FAQ toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
