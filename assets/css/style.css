@@ -7,6 +7,9 @@
     --medium-gray: #e0e0e0;
     --dark-gray: #333;
     --white: #ffffff;
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+    --transition-slow: 0.8s ease;
 }
 
 * {
@@ -20,6 +23,54 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--dark-gray);
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.8s ease forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.scale-in {
+    animation: scaleIn 0.6s ease forwards;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
     background-color: var(--white);
 }
 
@@ -598,34 +649,20 @@ nav ul li a:hover::after, nav ul li a.active::after {
     position: relative;
 }
 
+.testimonial-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    overflow: hidden;
+}
+
 .testimonial-card {
     flex: 0 0 100%;
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     position: relative;
-    transition: transform 0.5s ease;
-    opacity: 0;
-    transform: translateX(100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.testimonial-card.active {
-    opacity: 1;
-    transform: translateX(0);
-    position: relative;
-}
-
-.testimonial-card.prev {
-    transform: translateX(-100%);
-}
-
-.testimonial-card.next {
-    transform: translateX(100%);
+    transition: transform 0.3s ease;
 }
 
 .testimonial-card::before {
@@ -1335,6 +1372,51 @@ footer {
     border: 0;
 }
 
+.service-areas {
+    margin-top: 40px;
+    background-color: var(--light-gray);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.service-areas h3 {
+    color: var(--navy);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.area-column ul {
+    list-style: none;
+}
+
+.area-column ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    padding-left: 25px;
+}
+
+.area-column ul li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: bold;
+}
+
+.areas-note {
+    margin-top: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
 /* Privacy Policy and Terms of Service Pages */
 .privacy-policy-section,
 .terms-section {
@@ -1471,4 +1553,59 @@ footer {
 
 .readme-link a:hover {
     text-decoration: underline;
+}
+
+/* Social Sharing */
+.service-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.social-share {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-share span {
+    font-size: 14px;
+    color: var(--dark-gray);
+}
+
+.share-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    background-color: var(--green);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+.share-btn.facebook:hover {
+    background-color: #3b5998;
+}
+
+.share-btn.twitter:hover {
+    background-color: #1da1f2;
+}
+
+.share-btn.linkedin:hover {
+    background-color: #0077b5;
+}
+
+.share-btn.copy:hover {
+    background-color: #6c757d;
 }

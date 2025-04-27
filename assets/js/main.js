@@ -11,6 +11,35 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuBtn.addEventListener('click', function() {
             navMenu.classList.toggle('active');
         });
+    }
+
+    // Animation on scroll
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.fade-in, .slide-up, .slide-in-left, .slide-in-right, .scale-in');
+
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            // If element is in viewport
+            if (elementPosition < windowHeight - 50) {
+                // Remove the animation class and re-add it to restart the animation
+                const animationClass = Array.from(element.classList).find(className =>
+                    ['fade-in', 'slide-up', 'slide-in-left', 'slide-in-right', 'scale-in'].includes(className)
+                );
+
+                if (animationClass && !element.classList.contains('animated')) {
+                    element.classList.add('animated');
+                }
+            }
+        });
+    };
+
+    // Run once on page load
+    setTimeout(animateOnScroll, 300);
+
+    // Run on scroll
+    window.addEventListener('scroll', animateOnScroll);
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
@@ -276,6 +305,97 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 });
             }
+        });
+    }
+
+    // Testimonial Slider Functionality
+    const testimonialSlider = document.querySelector('.testimonial-slider');
+    if (testimonialSlider) {
+        const testimonialContainer = testimonialSlider.querySelector('.testimonial-container');
+        const testimonialCards = testimonialSlider.querySelectorAll('.testimonial-card');
+        const prevButton = testimonialSlider.querySelector('.testimonial-prev');
+        const nextButton = testimonialSlider.querySelector('.testimonial-next');
+        const dotsContainer = testimonialSlider.querySelector('.testimonial-dots');
+
+        let currentIndex = 0;
+        let autoplayInterval;
+        const autoplayDelay = 5000; // 5 seconds between slides
+
+        // Create dots for each testimonial
+        testimonialCards.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('testimonial-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetAutoplay();
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        // Function to go to a specific slide
+        function goToSlide(index) {
+            // Update current index
+            currentIndex = index;
+
+            // Update active dot
+            const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+
+            // Calculate the translation value
+            const slideWidth = testimonialCards[0].offsetWidth;
+            const translateValue = -index * slideWidth;
+
+            // Apply the translation
+            testimonialContainer.style.transform = `translateX(${translateValue}px)`;
+        }
+
+        // Previous button click handler
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + testimonialCards.length) % testimonialCards.length;
+            goToSlide(currentIndex);
+            resetAutoplay();
+        });
+
+        // Next button click handler
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % testimonialCards.length;
+            goToSlide(currentIndex);
+            resetAutoplay();
+        });
+
+        // Start autoplay
+        function startAutoplay() {
+            autoplayInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % testimonialCards.length;
+                goToSlide(currentIndex);
+            }, autoplayDelay);
+        }
+
+        // Reset autoplay
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+
+        // Pause autoplay on hover
+        testimonialSlider.addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+
+        // Resume autoplay on mouse leave
+        testimonialSlider.addEventListener('mouseleave', () => {
+            startAutoplay();
+        });
+
+        // Initialize autoplay
+        startAutoplay();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            goToSlide(currentIndex);
         });
     }
 });
