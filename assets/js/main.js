@@ -22,43 +22,84 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Testimonial slider functionality
     const testimonialSlider = document.querySelector('.testimonial-slider');
-    if (testimonialSlider && testimonialSlider.children.length > 1) {
-        let currentSlide = 0;
-        const slides = testimonialSlider.children;
-        const totalSlides = slides.length;
+    if (testimonialSlider) {
+        const testimonialContainer = testimonialSlider.querySelector('.testimonial-container');
+        const testimonialCards = testimonialContainer.querySelectorAll('.testimonial-card');
+        const dotsContainer = testimonialSlider.querySelector('.testimonial-dots');
+        const prevButton = testimonialSlider.querySelector('.testimonial-prev');
+        const nextButton = testimonialSlider.querySelector('.testimonial-next');
 
-        // Create navigation dots
-        const dotsContainer = document.createElement('div');
-        dotsContainer.className = 'testimonial-dots';
-        testimonialSlider.parentNode.appendChild(dotsContainer);
+        if (testimonialCards.length > 0) {
+            let currentSlide = 0;
+            const totalSlides = testimonialCards.length;
 
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('span');
-            dot.className = 'testimonial-dot';
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'testimonial-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
 
-        // Function to go to a specific slide
-        function goToSlide(index) {
-            currentSlide = index;
-            testimonialSlider.scrollTo({
-                left: slides[index].offsetLeft,
-                behavior: 'smooth'
+            // Initialize first slide
+            testimonialCards[0].classList.add('active');
+
+            // Function to go to a specific slide
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+
+                // Update current slide
+                testimonialCards.forEach((card, i) => {
+                    card.classList.remove('active', 'prev', 'next');
+                    if (i === index) {
+                        card.classList.add('active');
+                    } else if (i < index) {
+                        card.classList.add('prev');
+                    } else {
+                        card.classList.add('next');
+                    }
+                });
+
+                // Update dots
+                const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+
+                currentSlide = index;
+            }
+
+            // Event listeners for navigation
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    goToSlide(currentSlide - 1);
+                });
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    goToSlide(currentSlide + 1);
+                });
+            }
+
+            // Auto-advance slides every 5 seconds
+            let slideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
+
+            // Pause auto-advance on hover
+            testimonialContainer.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
             });
 
-            // Update active dot
-            document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
+            testimonialContainer.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(() => {
+                    goToSlide(currentSlide + 1);
+                }, 5000);
             });
         }
-
-        // Auto-advance slides every 5 seconds
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-        }, 5000);
     }
 
     // Form validation
